@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.dev.newsapp.data.model.Source
+import com.dev.newsapp.utils.SourceConverters
 
 @Entity(tableName = "article", indices = [Index(value = ["id"],unique = true)])
 data class Article(
@@ -24,6 +26,7 @@ data class Article(
     @ColumnInfo(name = "publishedAt")
     val publishedAt: String?,
 
+    @TypeConverters(SourceConverters::class)
     @ColumnInfo(name = "source")
     val source: Source,
 

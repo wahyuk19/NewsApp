@@ -62,6 +62,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     //glide
     implementation("com.github.bumptech.glide:glide:4.13.2")
