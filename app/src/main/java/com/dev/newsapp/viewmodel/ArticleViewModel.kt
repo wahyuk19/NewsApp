@@ -8,6 +8,7 @@ import com.dev.newsapp.data.model.entity.Article
 import com.dev.newsapp.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,24 @@ class ArticleViewModel @Inject constructor(private val repository: NewsRepositor
         return  _article
     }
 
+    fun searchArticle(title: String): MutableStateFlow<PagingData<Article>>{
+        loadArticleByTitle(title)
+        return _article
+    }
+
     private val _article: MutableStateFlow<PagingData<Article>> = MutableStateFlow(value = PagingData.empty())
+
+    private fun loadArticleByTitle(title: String){
+        viewModelScope.launch {
+            getArticleByTitle(title)
+        }
+    }
+
+    private suspend fun getArticleByTitle(title: String) {
+        repository.searchArticle(title).distinctUntilChanged().cachedIn(viewModelScope).collect{
+            _article.value = it
+        }
+    }
 
     private fun loadArticle(sources: String){
         viewModelScope.launch {

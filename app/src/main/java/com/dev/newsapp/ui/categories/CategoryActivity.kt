@@ -47,6 +47,6 @@ class CategoryActivity : AppCompatActivity() {
         val menuJson: JsonElement =
             JsonParser.parseString(inputStreamToString(resources.openRawResource(R.raw.categories)))
         val listType = object : TypeToken<List<Categories?>?>() {}.type
-        return Gson().fromJson(menuJson.asJsonObject["categories"].asJsonArray, listType)
+        return Gson().fromJson(menuJson.asJsonObject["category"].asJsonArray, listType)
     }
 }

@@ -12,7 +12,7 @@ import com.dev.newsapp.data.repository.NewsRepository.Companion.PAGE_SIZE
 
 @OptIn(ExperimentalPagingApi::class)
 class ArticleRemoteMediator(
-    private val category: String,
+    private val source: String,
     private val db: NewsRoomDatabase,
     private val api: NewsApi
 ): RemoteMediator<Int, Article>() {
@@ -44,7 +44,7 @@ class ArticleRemoteMediator(
         }
 
         try{
-            val responseData = api.getHeadlines(sources = category, page = page, pageSize = PAGE_SIZE).articles
+            val responseData = api.getHeadlines(sources = source, page = page, pageSize = PAGE_SIZE).articles
 
             val endOfPaginationReached = responseData.isEmpty()
 
@@ -54,7 +54,7 @@ class ArticleRemoteMediator(
                     db.articleDao().delete()
                 }
                 val prevKey = if (page == 1) null else page - 1
-                val nextKey = if (endOfPaginationReached) null else responseData[responseData.size-1].id
+                val nextKey = if (endOfPaginationReached) null else page + 1
                 val keys = responseData.map {
                     RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
                 }

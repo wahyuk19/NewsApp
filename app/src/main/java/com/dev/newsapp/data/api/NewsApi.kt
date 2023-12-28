@@ -3,6 +3,7 @@ package com.dev.newsapp.data.api
 import com.dev.newsapp.BuildConfig
 import com.dev.newsapp.data.model.News
 import com.dev.newsapp.data.model.Sources
+import com.dev.newsapp.data.model.entity.SourceData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

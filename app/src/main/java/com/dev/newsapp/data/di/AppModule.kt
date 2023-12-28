@@ -32,7 +32,7 @@ object AppModule {
 
         val okHttpClient = OkHttpClient().newBuilder()
 
-        val client = okHttpClient
+        val client = OkHttpClient.Builder()
             .addInterceptor(logging)
             .connectTimeout(50, TimeUnit.SECONDS)
             .readTimeout(50,TimeUnit.SECONDS)
@@ -40,6 +40,7 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
+            .client(okHttpClient.build())
             .client(client)
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

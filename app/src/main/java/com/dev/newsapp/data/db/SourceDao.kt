@@ -20,4 +20,7 @@ interface SourceDao {
 
     @Query("SELECT * FROM source ORDER BY id ASC")
     fun getAllSourcesAsc(): List<SourceData>
+
+    @Query("SELECT * FROM source WHERE name LIKE '%' || :name || '%'")
+    suspend fun searchSource(name: String): List<SourceData>
 }

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.dev.newsapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -79,12 +79,15 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
 
     //hilt
-    implementation("com.google.dagger:hilt-android:2.46")
-    ksp("com.google.dagger:hilt-compiler:2.46")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    ksp("com.google.dagger:hilt-compiler:2.48.1")
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-ktx:1.8.2")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
