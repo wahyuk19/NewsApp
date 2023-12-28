@@ -3,17 +3,11 @@ package com.dev.newsapp.data.api
 import com.dev.newsapp.BuildConfig
 import com.dev.newsapp.data.model.News
 import com.dev.newsapp.data.model.Sources
-import com.dev.newsapp.data.model.entity.SourceData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 val key = BuildConfig.API_KEY
 interface NewsApi {
-
-    @GET("everything")
-    suspend fun getArticles(
-
-    ):News
 
     @GET("top-headlines")
     suspend fun getHeadlines(

@@ -3,11 +3,13 @@ package com.dev.newsapp.ui.categories
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.newsapp.R
 import com.dev.newsapp.data.model.Categories
 import com.dev.newsapp.databinding.ActivityCategoryBinding
 import com.dev.newsapp.ui.source.SourceActivity
+import com.dev.newsapp.utils.checkInternet
 import com.dev.newsapp.utils.inputStreamToString
 import com.google.gson.Gson
 import com.google.gson.JsonElement
@@ -38,9 +40,15 @@ class CategoryActivity : AppCompatActivity() {
     }
 
     private fun doClick(category: String) {
-        val intent = Intent(this,SourceActivity::class.java)
-        intent.putExtra("category",category)
-        startActivity(intent)
+        val checkInternet = checkInternet(this)
+
+        if(checkInternet){
+            val intent = Intent(this,SourceActivity::class.java)
+            intent.putExtra("category",category)
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, "please check your connection", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createCategoriesFromRawAsset(): List<Categories> {

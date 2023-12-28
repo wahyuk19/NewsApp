@@ -1,7 +1,8 @@
 package com.dev.newsapp.utils
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import java.io.IOException
 import java.io.InputStream
 import java.time.Instant
@@ -33,4 +34,17 @@ fun String.capitalizeFirstChar(): String {
     } else {
         this
     }
+}
+
+fun checkInternet(mContext: Context): Boolean {
+    val connectivityManager =
+        mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    val network = connectivityManager.activeNetwork
+    if (network != null) {
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+        return networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+    }
+
+    return false
 }

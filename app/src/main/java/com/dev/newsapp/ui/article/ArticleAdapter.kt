@@ -1,10 +1,7 @@
 package com.dev.newsapp.ui.article
 
-import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +39,7 @@ class ArticleAdapter(val callback: (url: String) -> Unit) : PagingDataAdapter<Ar
         val binding = ItemArticlesBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ArticleViewHolder(binding)
     }
-    class ArticleViewHolder(val binding: ItemArticlesBinding): RecyclerView.ViewHolder(binding.root){}
+    class ArticleViewHolder(val binding: ItemArticlesBinding): RecyclerView.ViewHolder(binding.root)
     companion object{
         private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<Article>(){
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =

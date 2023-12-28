@@ -4,15 +4,12 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.dev.newsapp.BuildConfig
 import com.dev.newsapp.data.Resource
 import com.dev.newsapp.data.api.NewsApi
 import com.dev.newsapp.data.db.ArticleRemoteMediator
 import com.dev.newsapp.data.db.NewsRoomDatabase
-import com.dev.newsapp.data.model.Sources
 import com.dev.newsapp.data.model.entity.Article
 import com.dev.newsapp.data.model.entity.SourceData
-import com.dev.newsapp.data.paging.ArticlePagingSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -36,14 +33,13 @@ class NewsRepository @Inject constructor(
         ).flow
     }
 
-    fun searchArticle(source: String): Flow<PagingData<Article>>{
+    fun searchArticle(title: String): Flow<PagingData<Article>>{
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE
             ),
-            remoteMediator = ArticleRemoteMediator(source, db, api),
             pagingSourceFactory = {
-                db.articleDao().getAllArticlesAsc()
+                db.articleDao().searchArticle(title)
             }
         ).flow
     }

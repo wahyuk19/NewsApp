@@ -9,9 +9,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.newsapp.R
-import com.dev.newsapp.data.Resource
 import com.dev.newsapp.databinding.ActivityArticleBinding
 import com.dev.newsapp.ui.webview.WebViewActivity
+import com.dev.newsapp.utils.checkInternet
 import com.dev.newsapp.viewmodel.ArticleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -32,9 +32,15 @@ class ArticleActivity : AppCompatActivity() {
         val sourceName = intent.getStringExtra("source")
 
         adapter = ArticleAdapter{ url ->
-            val intent = Intent(this@ArticleActivity,WebViewActivity::class.java)
-            intent.putExtra("url",url)
-            startActivity(intent)
+            val checkInternet = checkInternet(this)
+
+            if(checkInternet){
+                val intent = Intent(this@ArticleActivity,WebViewActivity::class.java)
+                intent.putExtra("url",url)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "please check your connection", Toast.LENGTH_SHORT).show()
+            }
         }
 
         with(binding){

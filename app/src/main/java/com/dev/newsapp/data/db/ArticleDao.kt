@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.dev.newsapp.data.model.entity.Article
-import com.dev.newsapp.data.model.entity.SourceData
 
 @Dao
 interface ArticleDao {
@@ -24,5 +23,5 @@ interface ArticleDao {
     fun getAllArticlesAsc(): PagingSource<Int,Article>
 
     @Query("SELECT * FROM article WHERE title LIKE '%' || :title || '%'")
-    suspend fun searchArticle(title: String): List<Article>
+    fun searchArticle(title: String): PagingSource<Int,Article>
 }

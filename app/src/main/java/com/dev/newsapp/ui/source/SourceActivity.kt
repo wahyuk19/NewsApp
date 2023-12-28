@@ -8,12 +8,12 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.dev.newsapp.R
 import com.dev.newsapp.data.Resource
 import com.dev.newsapp.databinding.ActivitySourceBinding
 import com.dev.newsapp.ui.article.ArticleActivity
 import com.dev.newsapp.utils.capitalizeFirstChar
+import com.dev.newsapp.utils.checkInternet
 import com.dev.newsapp.viewmodel.SourceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,10 +31,17 @@ class SourceActivity : AppCompatActivity() {
         val category = intent.getStringExtra("category")
 
         adapter = SourceAdapter{sourceId,sourceName ->
-            val intent = Intent(this@SourceActivity,ArticleActivity::class.java)
-            intent.putExtra("id",sourceId)
-            intent.putExtra("source",sourceName)
-            startActivity(intent)
+            val checkInternet = checkInternet(this)
+
+            if(checkInternet){
+                val intent = Intent(this@SourceActivity,ArticleActivity::class.java)
+                intent.putExtra("id",sourceId)
+                intent.putExtra("source",sourceName)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "please check your connection", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         with(binding){
@@ -99,7 +106,7 @@ class SourceActivity : AppCompatActivity() {
                     }
                 }
             }
-            sourceViewModel.getSources(category.toString())
+            sourceViewModel.getSources(category)
 
         }
     }
