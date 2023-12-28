@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">News App</string>
+    <string name="select_category">Select a Category</string>
+    <string name="search_source">Search source</string>
+    <string name="img">img</string>
+    <string name="source_sample">ABC News</string>
+    <string name="language">id</string>
+    <string name="country">id</string>
+    <string name="title">Title</string>
+    <string name="author">John</string>
+    <string name="date">October,15th 2023</string>
+    <string name="search_article">Search Article</string>
+</resources>

@@ -1,0 +1,33 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "title": "General"
+    },
+    {
+      "id": 2,
+      "title": "Business"
+    },
+    {
+      "id": 3,
+      "title": "Entertainment"
+    },
+    {
+      "id": 4,
+      "title": "Health"
+    },
+    {
+      "id": 5,
+      "title": "Science"
+    },
+    {
+      "id": 6,
+      "title": "Sports"
+    },
+    {
+      "id": 7,
+      "title": "Technology"
+    }
+  ]
+}
+
